@@ -3,9 +3,7 @@ extern crate tokio_hang_test;
 
 use std::env;
 use std::sync::Arc;
-use tokio_hang_test::MyResult;
-use tokio_hang_test::filter::{ApproveV0, Filter};
-use tokio_hang_test::server::{MyState, PrimusState};
+use tokio_hang_test::{MyResult, MyState, PrimusState};
 
 
 #[tokio::main]
@@ -20,7 +18,7 @@ async fn main() -> MyResult<()> {
         })
     });
 
-    let app = tokio_hang_test::server::build_router(state);
+    let app = tokio_hang_test::build_router(state);
 
     // run it with hyper on localhost:3000
     axum::Server::bind(&"127.0.0.1:7341".parse().unwrap())
