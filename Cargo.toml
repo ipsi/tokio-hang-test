@@ -1,0 +1,70 @@
+[package]
+name = "tokio-hang-test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build]
+rustflags = ["--cfg", "tokio_unstable"]
+rustdocflags = ["--cfg", "tokio_unstable"]
+
+[dependencies]
+# Async Runtime (Hyper, Axum, Reqwest & Tungstenite run atop it)
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version="0.7.4", features=["io"] }
+futures-core = "0.3"
+futures-util = "0.3"
+tokio-metrics = "0.1.0"
+console-subscriber = "0.1.8"
+# Async Traits are way harder than they sound, and this is a workaround until they eventually land in core
+async-trait = "0.1.58"
+# Low-level HTTP client/server - Reqwest & Axum build atop it
+hyper = "0.14.22"
+# Async Web Server
+axum = { version="0.5.17", features=["headers", "http1", "json", "ws", "query"] }
+axum-macros = "0.2.3"
+# Middleware layer for Axum
+tower = "0.4.13"
+# Async Web Client
+reqwest = "0.11.12"
+# Async WebSockets (indirectly supported by reqwest)
+tokio-tungstenite = "0.17.2"
+# Serde is a general framework for serialisation/deserialisation, with serde_json providing JSON-specific parts
+serde = { version = "1.0.147", features = ["derive"] }
+serde_json = "1.0.87"
+serde_repr = "0.1.9"
+# Regexes
+regex = "1.6.0"
+# Temporary Files
+tempfile = "3.3.0"
+# Error handling + Backtraces
+anyhow = "1.0.66"
+# Structured logging + tracing
+tracing = "0.1.37"
+# "Subscribers" for tracing -- used for displaying the results (e.g., as JSON)
+tracing-subscriber = { version = "0.3.16", features = ["std", "env-filter", "fmt", "ansi", "registry"] }
+# Lazy initialisation of shared data
+once_cell = "1.16.0"
+# Endianness/etc
+byteorder = "1.4.3"
+# Byte utils
+bytes = "1.2.1"
+# Pure Rust TLS implementation - may need to switch for rust-native-tls, which delegates to OpenSSL/etc
+rustls = "0.20.7"
+# Argument parsing
+clap = "4.0.18"
+# Concurrent HashMap
+dashmap = "5.4.0"
+# Better-performing mutexes
+parking_lot = "0.12.1"
+# Better-performing channels
+crossbeam = "0.8.2"
+# UUID support
+uuid = { version = "1.2.1", features = ["v4", "serde"] }
+# Base64 encoding/decoding
+base64 = "0.13.1"
+# Random number generation
+rand = "0.8.5"
+# Additional utilites for iterables/etc which may one day move to standard
+itertools = "0.10.5"
